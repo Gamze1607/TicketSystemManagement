@@ -43,24 +43,43 @@
 
         private static Event DisplayAddEvent()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("[1]     Добавяне на ново събитие        ");
+            Console.WriteLine("========================================");
+            Console.Write("Въведете ID на събитието: ");
+            int id = int.Parse(Console.ReadLine()!);
+            Console.Write("Въведете име на събитието: ");
+            string name = Console.ReadLine()!;
+            Console.Write("Въведете дата на събитието (формат: ГГГГ-ММ-ДД): ");
+            DateTime date = DateTime.Parse(Console.ReadLine()!);
+            Console.Write("Въведете място на събитието: ");
+            string venue = Console.ReadLine()!;
+            Console.Write("Въведете общ брой билети: ");
+            int totalTickets = int.Parse(Console.ReadLine()!);
+            Console.Write("Въведете Налични билети: ");
+            int availableTickets = int.Parse(Console.ReadLine()!);
+            Console.Write("Въведете цена на билета: ");
+            decimal price = decimal.Parse(Console.ReadLine()!);
+            Console.WriteLine("Събитието е добавено успешно!");
+            return new Event(id, name, date, venue, totalTickets, price);
         }
 
         private static void DisplayTicketSales()
         {
+            Console.WriteLine("[2]    Продажба на билети за събитие:    ");
             throw new NotImplementedException();
         }
 
         private static void DisplayTicketAvailability()
         {
+            Console.WriteLine("[3]  Проверка за наличността на билети:  ");
             throw new NotImplementedException();
         }
         private static void DisplayAllEvents()
         {
-            Console.WriteLine("Show all events:");
+            Console.WriteLine("[4]     Справка за всички събития:       ");
             foreach (var ev in data.Events)
             {
-                Console.WriteLine($"ID: {ev.eventId}, Name: {ev.name}, Date: {ev.date.ToShortDateString()}, Venue: {ev.venue}, Available Tickets: {ev.availableTickets}, Price:{ev.price:C}");
+                Console.Write($"ID: {ev.eventId}, Име: {ev.name}, Дата: {ev.date.ToShortDateString()}, Местоположение: {ev.venue}, Общ брой билети: {ev.totalTickets}, Налични билети: {ev.availableTickets}, Цена:{ev.price:C}");
             }
         }
         private static void DisplayMenu()
@@ -75,4 +94,9 @@
             Console.WriteLine("===============================================");
             Console.Write("> Изберете опция: ");
         }
-}   }
+
+        private static void BackToMenu()
+        {
+
+        }
+}   }      

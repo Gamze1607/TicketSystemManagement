@@ -57,10 +57,22 @@
         }
         private static void DisplayAllEvents()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Show all events:");
+            foreach (var ev in data.Events)
+            {
+                Console.WriteLine($"ID: {ev.eventId}, Name: {ev.name}, Date: {ev.date.ToShortDateString()}, Venue: {ev.venue}, Available Tickets: {ev.availableTickets}, Price:{ev.price:C}");
+            }
         }
         private static void DisplayMenu()
         {
-            throw new NotImplementedException();
+            Console.Clear();
+            Console.WriteLine("==================[ М Е Н Ю ]==================");
+            Console.WriteLine("|  [1]  Добавяне на ново събитие              |");
+            Console.WriteLine("|  [2]  Продажба на билети за събитие         |");
+            Console.WriteLine("|  [3]  Проверка за наличността на билети     |");
+            Console.WriteLine("|  [4]  Справка за всички събития             |");
+            Console.WriteLine("|  [x]  Изход                                 |");
+            Console.WriteLine("===============================================");
+            Console.Write("> Изберете опция: ");
         }
 }   }

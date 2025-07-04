@@ -104,7 +104,6 @@
                     break;
                 Console.WriteLine("Цената на билета трябва да бъде положително число.");
             }
-            Console.WriteLine("Събитието е добавено успешно!");
             Console.WriteLine($"Налични билети: {totalTickets}");
             return new Event(id, name, date, venue, totalTickets, price);
         }
@@ -201,7 +200,7 @@
                 Console.WriteLine(message);
             }
             Console.WriteLine();
-            Console.Write("Натиснете бутона за да се върнете към меню ");
+            Console.Write("Натиснете бутона Enter, за да се върнете към меню ");
             Console.ReadLine();
             DisplayMenu();
         }

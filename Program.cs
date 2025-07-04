@@ -45,8 +45,7 @@
         {
             Console.WriteLine("[1]     Добавяне на ново събитие        ");
             Console.WriteLine("========================================");
-            Console.Write("Въведете ID на събитието: ");
-            int id = int.Parse(Console.ReadLine()!);
+            int id = data.Events.Count > 0 ? data.Events.Max(e => e.eventId) + 1 : 1;
             Console.Write("Въведете име на събитието: ");
             string name = Console.ReadLine()!;
             Console.Write("Въведете дата на събитието (формат: ГГГГ-ММ-ДД): ");
@@ -55,8 +54,7 @@
             string venue = Console.ReadLine()!;
             Console.Write("Въведете общ брой билети: ");
             int totalTickets = int.Parse(Console.ReadLine()!);
-            Console.Write("Въведете Налични билети: ");
-            int availableTickets = int.Parse(Console.ReadLine()!);
+            int availableTickets = totalTickets; 
             Console.Write("Въведете цена на билета: ");
             decimal price = decimal.Parse(Console.ReadLine()!);
             Console.WriteLine("Събитието е добавено успешно!");
@@ -97,6 +95,6 @@
 
         private static void BackToMenu()
         {
-
+            
         }
 }   }      

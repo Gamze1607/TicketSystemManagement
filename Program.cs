@@ -26,7 +26,7 @@
                         DisplayTicketSales(data.Events);
                         break;
                     case "3":
-                        DisplayTicketAvailability();
+                        DisplayTicketAvailability(data.Events);
                         break;
                     case "4":
                         DisplayAllEvents();
@@ -73,7 +73,7 @@
                 return;
             }
 
-            Console.Write("Въведете ID на събитието от което искате да закупите билети: ");
+            Console.Write("Въведете ID на събитието, от което искате да закупите билети: ");
             if (!int.TryParse(Console.ReadLine(), out int eventIndex) || eventIndex < 1 || eventIndex > events.Count)
             {
                 Console.WriteLine("Няма такова събитие.");
@@ -99,10 +99,33 @@
             Console.WriteLine($"{ticketsToSell} билети продадени за '{selectedEvent.name}'. Налични билети след продажба: {selectedEvent.availableTickets}");
         }
 
-        private static void DisplayTicketAvailability()
+        private static void DisplayTicketAvailability(List<Event> events)
         {
             Console.WriteLine("[3]  Проверка за наличността на билети:  ");
-            throw new NotImplementedException();
+            if (events == null || events.Count == 0)
+            {
+                Console.WriteLine("Няма налични събития.");
+                return;
+            }
+
+            Console.Write("Въведете ID на събитието,за да видите наличните билети: ");
+            if (!int.TryParse(Console.ReadLine(), out int eventIndex) || eventIndex < 1 || eventIndex > events.Count)
+            {
+                Console.WriteLine("Няма такова събитие.");
+                return;
+            }
+
+            Event selectedEvent = events[eventIndex - 1];
+
+            if (selectedEvent.availableTickets > 0)
+            {
+                Console.WriteLine($"'{selectedEvent.name}' има {selectedEvent.availableTickets} налични билети.");
+            }
+            else
+            {
+                Console.WriteLine($"Билетите за'{selectedEvent.name}' вече са разпродадени.");
+            }
+
         }
         private static void DisplayAllEvents()
         {

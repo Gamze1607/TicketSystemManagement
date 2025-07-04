@@ -9,9 +9,12 @@
 
             DisplayMenu();
 
-            string choice;
-            while ((choice = Console.ReadLine()) != "x")
+            string ?choice;
+            while (!string.IsNullOrEmpty(choice = Console.ReadLine()))
             {
+                if (choice == "x")
+                    break;
+
                 switch (choice)
                 {
                     case "1":
@@ -21,7 +24,6 @@
                         break;
                     case "2":
                         DisplayTicketSales();
-
                         break;
                     case "3":
                         DisplayTicketAvailability();
@@ -33,6 +35,7 @@
                         break;
                 }
             }
+
         }
 
         private static void SetIOEncoding()

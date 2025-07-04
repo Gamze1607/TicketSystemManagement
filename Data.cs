@@ -11,10 +11,10 @@ namespace TicketSystemManagement
     using static Constants;
     public class Data
     {
-        public List<Event> Events { get; private set; }
+        public List<Event> Events { get; private set; } = new List<Event>();
 
-        private StreamReader reader;
-        private StreamWriter writer;
+        private StreamReader? reader;
+        private StreamWriter? writer;
 
         public Data()
         {
@@ -44,6 +44,7 @@ namespace TicketSystemManagement
                 }
             }
         }
+
 
     }
 }

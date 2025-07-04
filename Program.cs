@@ -21,15 +21,22 @@
                         Event newEvent = DisplayAddEvent();
                         data.Events.Add(newEvent);
                         data.Save();
+                        BackToMenu("Събитието е добавено успешно!", true);
                         break;
                     case "2":
                         DisplayTicketSales(data.Events);
+                        data.Save();
+                        BackToMenu("Продажбата на билети е завършена успешно!");
                         break;
                     case "3":
                         DisplayTicketAvailability(data.Events);
+                        data.Save();
+                        BackToMenu("Проверка за наличността на билети е завършена успешно!");
                         break;
                     case "4":
                         DisplayAllEvents();
+                        data.Save();
+                        BackToMenu("Справката за всички събития е завършена успешно!");
                         break;
                     default:
                         break;
@@ -49,18 +56,56 @@
             Console.WriteLine("[1]     Добавяне на ново събитие        ");
             Console.WriteLine("========================================");
             int id = data.Events.Count > 0 ? data.Events.Max(e => e.eventId) + 1 : 1;
-            Console.Write("Въведете име на събитието: ");
-            string name = Console.ReadLine()!;
-            Console.Write("Въведете дата на събитието (формат: ГГГГ-ММ-ДД): ");
-            DateTime date = DateTime.Parse(Console.ReadLine()!);
-            Console.Write("Въведете място на събитието: ");
-            string venue = Console.ReadLine()!;
-            Console.Write("Въведете общ брой билети: ");
-            int totalTickets = int.Parse(Console.ReadLine()!);
-            int availableTickets = totalTickets; 
-            Console.Write("Въведете цена на билета: ");
-            decimal price = decimal.Parse(Console.ReadLine()!);
+            string name;
+            do
+            {
+                Console.Write("Въведете име на събитието: ");
+                name = Console.ReadLine()!;
+                if (string.IsNullOrWhiteSpace(name))
+                    Console.WriteLine("Името на събитието не може да бъде празно.");
+            } while (string.IsNullOrWhiteSpace(name));
+            DateTime date;
+            while (true)
+            {
+                Console.Write("Въведете дата на събитието (формат: ГГГГ-ММ-ДД): ");
+                if (DateTime.TryParse(Console.ReadLine(), out date))
+                {
+                    if (date < DateTime.Now)
+                        Console.WriteLine("Дата на събитието не може да бъде в миналото.");
+                    else
+                        break;
+                }
+                else
+                {
+                    Console.WriteLine("Невалиден формат на датата.");
+                }
+            }
+            string venue;
+            do
+            {
+                Console.Write("Въведете място на събитието: ");
+                venue = Console.ReadLine()!;
+                if (string.IsNullOrWhiteSpace(venue))
+                    Console.WriteLine("Мястото на събитието не може да бъде празно.");
+            } while (string.IsNullOrWhiteSpace(venue));
+            int totalTickets;
+            while (true)
+            {
+                Console.Write("Въведете общ брой билети: ");
+                if (int.TryParse(Console.ReadLine(), out totalTickets) && totalTickets > 0)
+                    break;
+                Console.WriteLine("Общият брой билети трябва да бъде положително число.");
+            }
+            decimal price;
+            while (true)
+            {
+                Console.Write("Въведете цена на билета: ");
+                if (decimal.TryParse(Console.ReadLine(), out price) && price > 0)
+                    break;
+                Console.WriteLine("Цената на билета трябва да бъде положително число.");
+            }
             Console.WriteLine("Събитието е добавено успешно!");
+            Console.WriteLine($"Налични билети: {totalTickets}");
             return new Event(id, name, date, venue, totalTickets, price);
         }
 

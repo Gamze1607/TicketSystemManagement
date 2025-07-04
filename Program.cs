@@ -9,7 +9,7 @@
 
             DisplayMenu();
 
-            string ?choice;
+            string? choice;
             while (!string.IsNullOrEmpty(choice = Console.ReadLine()))
             {
                 if (choice == "x")
@@ -23,7 +23,7 @@
                         data.Save();
                         break;
                     case "2":
-                        DisplayTicketSales();
+                        DisplayTicketSales(data.Events);
                         break;
                     case "3":
                         DisplayTicketAvailability();
@@ -64,10 +64,39 @@
             return new Event(id, name, date, venue, totalTickets, price);
         }
 
-        private static void DisplayTicketSales()
+        private static void DisplayTicketSales(List<Event> events)
         {
             Console.WriteLine("[2]    Продажба на билети за събитие:    ");
-            throw new NotImplementedException();
+            if (events.Count == 0)
+            {
+                Console.WriteLine("Няма налични събития.");
+                return;
+            }
+
+            Console.Write("Въведете ID на събитието от което искате да закупите билети: ");
+            if (!int.TryParse(Console.ReadLine(), out int eventIndex) || eventIndex < 1 || eventIndex > events.Count)
+            {
+                Console.WriteLine("Няма такова събитие.");
+                return;
+            }
+
+            Event selectedEvent = events[eventIndex - 1];
+
+            Console.Write($"Колко билета искате да закупите за'{selectedEvent.name}'? ");
+            if (!int.TryParse(Console.ReadLine(), out int ticketsToSell) || ticketsToSell < 1)
+            {
+                Console.WriteLine("Броят на билетите е невалиден.");
+                return;
+            }
+
+            if (ticketsToSell > selectedEvent.availableTickets)
+            {
+                Console.WriteLine("Няма достатъчно билети.");
+                return;
+            }
+
+            selectedEvent.availableTickets -= ticketsToSell;
+            Console.WriteLine($"{ticketsToSell} билети продадени за '{selectedEvent.name}'. Налични билети след продажба: {selectedEvent.availableTickets}");
         }
 
         private static void DisplayTicketAvailability()
@@ -78,6 +107,7 @@
         private static void DisplayAllEvents()
         {
             Console.WriteLine("[4]     Справка за всички събития:       ");
+            Console.WriteLine("eventID\\name\\date\\venue\\totalTickets\\avaibleTickets\\price");
             foreach (var ev in data.Events)
             {
                 Console.Write($"ID: {ev.eventId}, Име: {ev.name}, Дата: {ev.date.ToShortDateString()}, Местоположение: {ev.venue}, Общ брой билети: {ev.totalTickets}, Налични билети: {ev.availableTickets}, Цена:{ev.price:C}");
@@ -96,8 +126,15 @@
             Console.Write("> Изберете опция: ");
         }
 
-        private static void BackToMenu()
+        private static void BackToMenu(string message, bool success = true)
         {
-            
+            if (success)
+            {
+                Console.WriteLine(message);
+            }
+            Console.WriteLine();
+            Console.Write("Натиснете бутона за да се върнете към меню ");
+            Console.ReadLine();
+            DisplayMenu();
         }
 }   }      

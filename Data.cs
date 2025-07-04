@@ -34,6 +34,11 @@ namespace TicketSystemManagement
         public void LoadEvents()
         {
             Events = new List<Event>();
+            if (!File.Exists(filePath))
+            {
+                Console.WriteLine($" Стартирай с празен лист за събития.");
+                return;
+            }
             reader = new StreamReader(filePath);
             using (reader)
             {

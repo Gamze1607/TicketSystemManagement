@@ -116,7 +116,12 @@
                 Console.WriteLine("Няма налични събития.");
                 return;
             }
-
+            Console.WriteLine("Налични събития:");
+            for (int i = 0; i < events.Count; i++)
+            {
+                var ev = events[i];
+                Console.WriteLine($"{i + 1}. {ev.name} | Дата: {ev.date.ToShortDateString()} | Местоположение: {ev.venue} | Налични билети: {ev.availableTickets} | Цена: {ev.price:C}");
+            }
 
             Console.Write("Въведете ID на събитието, от което искате да закупите билети: ");
             if (!int.TryParse(Console.ReadLine(), out int eventIndex) || eventIndex < 1 || eventIndex > events.Count)
@@ -151,6 +156,12 @@
             {
                 Console.WriteLine("Няма налични събития.");
                 return;
+            }
+            Console.WriteLine("Налични събития:");
+            for (int i = 0; i < events.Count; i++)
+            {
+                var ev = events[i];
+                Console.WriteLine($"{i + 1}. {ev.name} | Дата: {ev.date.ToShortDateString()} | Местоположение: {ev.venue} | Налични билети: {ev.availableTickets} | Цена: {ev.price:C}");
             }
 
             Console.Write("Въведете ID на събитието,за да видите наличните билети: ");

@@ -1,0 +1,1 @@
+[{"eventId":1,"name":"metallica","date":"2026-09-15T00:00:00","venue":"Arena","totalTickets":20000,"availableTickets":19995,"price":75}]

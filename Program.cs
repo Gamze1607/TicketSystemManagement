@@ -186,10 +186,10 @@
         private static void DisplayAllEvents()
         {
             Console.WriteLine("[4]     Справка за всички събития:       ");
-            Console.WriteLine("eventID\\name\\date\\venue\\totalTickets\\avaibleTickets\\price");
+            Console.WriteLine("eventID\tname\tdate\tvenue\ttotalTickets\tavaibleTickets\tprice");
             foreach (var ev in data.Events)
             {
-                Console.Write($"ID: {ev.eventId}, Име: {ev.name}, Дата: {ev.date.ToShortDateString()}, Местоположение: {ev.venue}, Общ брой билети: {ev.totalTickets}, Налични билети: {ev.availableTickets}, Цена:{ev.price:C}");
+                Console.WriteLine($"{ev.eventId}\t{ev.name}\t{ev.date.ToShortDateString()}\t{ev.venue}\t{ev.totalTickets}\t{ev.availableTickets}\t{ev.price:C}");
             }
         }
         private static void DisplayMenu()

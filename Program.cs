@@ -67,7 +67,7 @@
             DateTime date;
             while (true)
             {
-                Console.Write("Въведете дата на събитието (формат: ГГГГ-ММ-ДД): ");
+                Console.Write("Въведете дата на събитието (формат: ДД-ММ-ГГГГ): ");
                 if (DateTime.TryParse(Console.ReadLine(), out date))
                 {
                     if (date < DateTime.Now)
@@ -96,6 +96,7 @@
                     break;
                 Console.WriteLine("Общият брой билети трябва да бъде положително число.");
             }
+            int availableTickets = totalTickets; 
             decimal price;
             while (true)
             {

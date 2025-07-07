@@ -24,12 +24,12 @@ namespace TicketSystemManagement
         public Event(int id, string Name, DateTime Date, string Venue, int totaltickets, decimal Price)
         {
             eventId = id;
-            name = Name;
-            date = Date;
-            venue= Venue;
-            totalTickets = totaltickets;
-            availableTickets = totaltickets;
-            price = Price;
+            this.name = Name;
+            this.date = Date;
+            this.venue= Venue;
+            this.totalTickets = totaltickets;
+            this.availableTickets = totaltickets;
+            this.price = Price;
         }
     }
 }

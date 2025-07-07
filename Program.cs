@@ -116,6 +116,7 @@
                 Console.WriteLine("Няма налични събития.");
                 return;
             }
+
             Console.WriteLine("{0,-10} {1,-20} {2,-12} {3,-10}", "ID", "Име", "Дата", "Свободни билети");
             foreach (var ev in events)
             {

@@ -117,11 +117,6 @@
                 return;
             }
 
-            Console.WriteLine("{0,-10} {1,-20} {2,-12} {3,-10}", "ID", "Име", "Дата", "Свободни билети");
-            foreach (var ev in events)
-            {
-                Console.WriteLine("{0,-10} {1,-20} {2,-12} {3,-10}", ev.eventId, ev.name, ev.date.ToString("ДД-ММ-ГГГГ "), ev.availableTickets);
-            }
 
             Console.Write("Въведете ID на събитието, от което искате да закупите билети: ");
             if (!int.TryParse(Console.ReadLine(), out int eventIndex) || eventIndex < 1 || eventIndex > events.Count)
@@ -158,12 +153,6 @@
                 return;
             }
 
-            Console.WriteLine("{0,-10} {1,-20} {2,-12} {3,-10}", "ID", "Име", "Дата", "Свободни билети");
-            foreach (var ev in events)
-            {
-                Console.WriteLine("{0,-10} {1,-20} {2,-12} {3,-10}", ev.eventId, ev.name, ev.date.ToString("ДД-ММ-ГГГГ "), ev.availableTickets);
-            }
-
             Console.Write("Въведете ID на събитието,за да видите наличните билети: ");
             if (!int.TryParse(Console.ReadLine(), out int eventIndex) || eventIndex < 1 || eventIndex > events.Count)
             {
@@ -186,18 +175,10 @@
         private static void DisplayAllEvents()
         {
             Console.WriteLine("[4]     Справка за всички събития:       ");
-            Console.WriteLine("{0,-10} {1,-20} {2,-15} {3,-12} {4,-15} {5,-18} {6,-10}",
-                "eventId", "name", "date", "venue", "totalTickets", "availableTickets", "price");
+            Console.WriteLine("eventID\\name\\date\\venue\\totalTickets\\avaibleTickets\\price");
             foreach (var ev in data.Events)
             {
-                Console.WriteLine("{0,-10} {1,-20} {2,-15} {3,-12} {4,-15} {5,-18} {6,-10:F2}",
-                    ev.eventId,
-                    ev.name,
-                    ev.date.ToString("ДД-ММ-ГГГГ"),
-                    ev.venue,
-                    ev.totalTickets,
-                    ev.availableTickets,
-                    ev.price);
+                Console.Write($"ID: {ev.eventId}, Име: {ev.name}, Дата: {ev.date.ToShortDateString()}, Местоположение: {ev.venue}, Общ брой билети: {ev.totalTickets}, Налични билети: {ev.availableTickets}, Цена:{ev.price:C}");
             }
         }
         private static void DisplayMenu()

@@ -96,7 +96,6 @@
                     break;
                 Console.WriteLine("Общият брой билети трябва да бъде положително число.");
             }
-            int availableTickets = totalTickets; 
             decimal price;
             while (true)
             {
@@ -116,6 +115,11 @@
             {
                 Console.WriteLine("Няма налични събития.");
                 return;
+            }
+            Console.WriteLine("{0,-10} {1,-20} {2,-12} {3,-10}", "ID", "Име", "Дата", "Свободни билети");
+            foreach (var ev in events)
+            {
+                Console.WriteLine("{0,-10} {1,-20} {2,-12} {3,-10}", ev.eventId, ev.name, ev.date.ToString("ДД-ММ-ГГГГ "), ev.availableTickets);
             }
 
             Console.Write("Въведете ID на събитието, от което искате да закупите билети: ");
@@ -151,6 +155,12 @@
             {
                 Console.WriteLine("Няма налични събития.");
                 return;
+            }
+
+            Console.WriteLine("{0,-10} {1,-20} {2,-12} {3,-10}", "ID", "Име", "Дата", "Свободни билети");
+            foreach (var ev in events)
+            {
+                Console.WriteLine("{0,-10} {1,-20} {2,-12} {3,-10}", ev.eventId, ev.name, ev.date.ToString("ДД-ММ-ГГГГ "), ev.availableTickets);
             }
 
             Console.Write("Въведете ID на събитието,за да видите наличните билети: ");

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TicketSystemManagement
 {
-    public class Event
+    public class Event     //by Gamze
     {
         public int eventId { get; set; }
 

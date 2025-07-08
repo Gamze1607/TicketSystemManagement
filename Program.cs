@@ -3,7 +3,7 @@
     public class Program
     {
         private static Data data = new Data();
-        public static void Main(string[] args)
+        public static void Main(string[] args)  //by Gamze
         {
             SetIOEncoding();
 
@@ -45,18 +45,19 @@
 
         }
 
-        private static void SetIOEncoding()
+        private static void SetIOEncoding() //by Gamze
         {
             Console.InputEncoding = System.Text.Encoding.UTF8;
             Console.OutputEncoding = System.Text.Encoding.UTF8;
         }
 
-        private static Event DisplayAddEvent()
+        private static Event DisplayAddEvent() //by Gamze, by Dzheyda
+                                               //създаване на ново събитие
         {
             Console.WriteLine("[1]     Добавяне на ново събитие        ");
             Console.WriteLine("========================================");
-            int id = data.Events.Count > 0 ? data.Events.Max(e => e.eventId) + 1 : 1;
-            string name;
+            int id = data.Events.Count > 0 ? data.Events.Max(e => e.eventId) + 1 : 1; //създаване на ID за събитието, като се взема най-голямото ID от съществуващите събития и се увеличава с 1
+            string name; //създаване на променлива за име и валидиране на въведената стойност
             do
             {
                 Console.Write("Въведете име на събитието: ");
@@ -64,7 +65,7 @@
                 if (string.IsNullOrWhiteSpace(name))
                     Console.WriteLine("Името на събитието не може да бъде празно.");
             } while (string.IsNullOrWhiteSpace(name));
-            DateTime date;
+            DateTime date; //създаване на променлива за дата и валидиране на въведената стойност
             while (true)
             {
                 Console.Write("Въведете дата на събитието (формат: ДД-ММ-ГГГГ): ");
@@ -80,7 +81,7 @@
                     Console.WriteLine("Невалиден формат на датата.");
                 }
             }
-            string venue;
+            string venue; //създаване на променлива за място и валидиране на въведената стойност
             do
             {
                 Console.Write("Въведете място на събитието: ");
@@ -88,7 +89,7 @@
                 if (string.IsNullOrWhiteSpace(venue))
                     Console.WriteLine("Мястото на събитието не може да бъде празно.");
             } while (string.IsNullOrWhiteSpace(venue));
-            int totalTickets;
+            int totalTickets; //създаване на променлива за общ брой билети и валидиране на въведената стойност
             while (true)
             {
                 Console.Write("Въведете общ брой билети: ");
@@ -96,7 +97,7 @@
                     break;
                 Console.WriteLine("Общият брой билети трябва да бъде положително число.");
             }
-            decimal price;
+            decimal price; //създаване на променлива за цена и валидиране на въведената стойност
             while (true)
             {
                 Console.Write("Въведете цена на билета: ");
@@ -105,20 +106,21 @@
                 Console.WriteLine("Цената на билета трябва да бъде положително число.");
             }
             Console.WriteLine($"Налични билети: {totalTickets}");
-            return new Event(id, name, date, venue, totalTickets, price);
+            return new Event(id, name, date, venue, totalTickets, price); //връща новосъздаденото събитие
         }
 
-        private static void DisplayTicketSales(List<Event> events)
+        private static void DisplayTicketSales(List<Event> events) //by Dzheyda
+            //извеждане за продажбата на билети за събития
         {
             Console.WriteLine("[2]    Продажба на билети за събитие:    ");
             Console.WriteLine("========================================");
-            if (events.Count == 0)
+            if (events.Count == 0) // проверка за налични събития
             {
                 Console.WriteLine("Няма налични събития.");
                 return;
             }
             Console.WriteLine("Налични събития:");
-            for (int i = 0; i < events.Count; i++)
+            for (int i = 0; i < events.Count; i++) // извеждане на списък с налични събития
             {
                 var ev = events[i];
                 Console.WriteLine($"{i + 1}. Име: {ev.name} | Дата: {ev.date.ToShortDateString()} | Местоположение: {ev.venue}  | Цена: {ev.price:C}");
@@ -127,7 +129,7 @@
             Console.WriteLine("========================================");
 
             Console.Write("Въведете ID на събитието, от което искате да закупите билети: ");
-            if (!int.TryParse(Console.ReadLine(), out int eventIndex) || eventIndex < 1 || eventIndex > events.Count)
+            if (!int.TryParse(Console.ReadLine(), out int eventIndex) || eventIndex < 1 || eventIndex > events.Count) // проверка за валидност на въведеното ID
             {
                 Console.WriteLine("Няма такова събитие.");
                 return;
@@ -136,13 +138,13 @@
             Event selectedEvent = events[eventIndex - 1];
 
             Console.Write($"Колко билета искате да закупите за'{selectedEvent.name}'? ");
-            if (!int.TryParse(Console.ReadLine(), out int ticketsToSell) || ticketsToSell < 1)
+            if (!int.TryParse(Console.ReadLine(), out int ticketsToSell) || ticketsToSell < 1) // проверка за валидност на броя въведени билети
             {
                 Console.WriteLine("Броят на билетите е невалиден.");
                 return;
             }
 
-            if (ticketsToSell > selectedEvent.availableTickets)
+            if (ticketsToSell > selectedEvent.availableTickets) // проверка за достатъчно налични билети
             {
                 Console.WriteLine("Няма достатъчно билети.");
                 return;
@@ -152,17 +154,18 @@
             Console.WriteLine($"{ticketsToSell} билети продадени за '{selectedEvent.name}'. Налични билети след продажба: {selectedEvent.availableTickets}");
         }
 
-        private static void DisplayTicketAvailability(List<Event> events)
+        private static void DisplayTicketAvailability(List<Event> events) //by Gamze
+                                                                          //извеждане на наличните билети за събития
         {
             Console.WriteLine("[3]  Проверка за наличността на билети:  ");
             Console.WriteLine("========================================");
-            if (events == null || events.Count == 0)
+            if (events == null || events.Count == 0) //проверка за налични събития
             {
                 Console.WriteLine("Няма налични събития.");
                 return;
             }
             Console.WriteLine("Налични събития:");
-            for (int i = 0; i < events.Count; i++)
+            for (int i = 0; i < events.Count; i++) //извеждане на списък с налични събития
             {
                 var ev = events[i];
                 Console.WriteLine($"{i + 1}. {ev.name} | Дата: {ev.date.ToShortDateString()} | Местоположение: {ev.venue}  | Цена: {ev.price:C}");
@@ -171,7 +174,7 @@
             Console.WriteLine("========================================");
 
             Console.Write("Въведете ID на събитието,за да видите наличните билети: ");
-            if (!int.TryParse(Console.ReadLine(), out int eventIndex) || eventIndex < 1 || eventIndex > events.Count)
+            if (!int.TryParse(Console.ReadLine(), out int eventIndex) || eventIndex < 1 || eventIndex > events.Count) //проверка за валидност на въведеното ID
             {
                 Console.WriteLine("Няма такова събитие.");
                 return;
@@ -179,26 +182,28 @@
 
             Event selectedEvent = events[eventIndex - 1];
 
-            if (selectedEvent.availableTickets > 0)
+            if (selectedEvent.availableTickets > 0) //проверка за налични билети
             {
                 Console.WriteLine($"'{selectedEvent.name}' има {selectedEvent.availableTickets} налични билети.");
             }
-            else
+            else //ако няма налични билети
             {
                 Console.WriteLine($"Билетите за'{selectedEvent.name}' вече са разпродадени.");
             }
 
         }
-        private static void DisplayAllEvents()
+        private static void DisplayAllEvents() //by Dzheyda, by Gamze
+            //исвеждане на всички събития
         {
             Console.WriteLine("[4]     Справка за всички събития:       ");
             Console.WriteLine("eventID\tname\tdate      \tvenue\ttotalTickets\tavaibleTickets\tprice");
-            foreach (var ev in data.Events)
+            foreach (var ev in data.Events) //извеждане на информация за събитията
             {
                 Console.WriteLine($"{ev.eventId}\t{ev.name}\t{ev.date.ToShortDateString()}\t{ev.venue}\t{ev.totalTickets}        \t{ev.availableTickets}        \t{ev.price:C}");
             }
         }
-        private static void DisplayMenu()
+        private static void DisplayMenu() //by Dzheyda
+                                          //извеждане на главното меню
         {
             Console.Clear();
             Console.WriteLine("==================[ М Е Н Ю ]==================");
@@ -211,7 +216,8 @@
             Console.Write("> Изберете опция: ");
         }
 
-        private static void BackToMenu(string message, bool success = true)
+        private static void BackToMenu(string message, bool success = true) //by Dzheyda
+                                                                            //връщане към главното меню
         {
             if (success)
             {

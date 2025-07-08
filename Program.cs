@@ -219,7 +219,7 @@
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("[4]     Справка за всички събития:       ");
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("eventID\tname\tdate      \tvenue\ttotalTickets\tavaibleTickets\tprice");
+            Console.WriteLine("eventID\tname      \tdate      \tvenue\ttotalTickets\tavaibleTickets\tprice");
             foreach (var ev in data.Events) //извеждане на информация за събитията
             {
                 Console.WriteLine($"{ev.eventId}\t{ev.name}\t{ev.date.ToShortDateString()}\t{ev.venue}\t{ev.totalTickets}        \t{ev.availableTickets}        \t{ev.price:C}");

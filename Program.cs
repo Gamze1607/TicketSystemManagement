@@ -106,7 +106,6 @@
             }
             Console.WriteLine($"Налични билети: {totalTickets}");
             return new Event(id, name, date, venue, totalTickets, price);
-
         }
 
         private static void DisplayTicketSales(List<Event> events)

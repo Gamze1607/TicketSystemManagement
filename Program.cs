@@ -111,6 +111,7 @@
         private static void DisplayTicketSales(List<Event> events)
         {
             Console.WriteLine("[2]    Продажба на билети за събитие:    ");
+            Console.WriteLine("========================================");
             if (events.Count == 0)
             {
                 Console.WriteLine("Няма налични събития.");
@@ -120,8 +121,10 @@
             for (int i = 0; i < events.Count; i++)
             {
                 var ev = events[i];
-                Console.WriteLine($"{i + 1}. {ev.name} | Дата: {ev.date.ToShortDateString()} | Местоположение: {ev.venue} | Налични билети: {ev.availableTickets} | Цена: {ev.price:C}");
+                Console.WriteLine($"{i + 1}. Име: {ev.name} | Дата: {ev.date.ToShortDateString()} | Местоположение: {ev.venue}  | Цена: {ev.price:C}");
             }
+
+            Console.WriteLine("========================================");
 
             Console.Write("Въведете ID на събитието, от което искате да закупите билети: ");
             if (!int.TryParse(Console.ReadLine(), out int eventIndex) || eventIndex < 1 || eventIndex > events.Count)
@@ -152,6 +155,7 @@
         private static void DisplayTicketAvailability(List<Event> events)
         {
             Console.WriteLine("[3]  Проверка за наличността на билети:  ");
+            Console.WriteLine("========================================");
             if (events == null || events.Count == 0)
             {
                 Console.WriteLine("Няма налични събития.");
@@ -161,8 +165,10 @@
             for (int i = 0; i < events.Count; i++)
             {
                 var ev = events[i];
-                Console.WriteLine($"{i + 1}. {ev.name} | Дата: {ev.date.ToShortDateString()} | Местоположение: {ev.venue} | Налични билети: {ev.availableTickets} | Цена: {ev.price:C}");
+                Console.WriteLine($"{i + 1}. {ev.name} | Дата: {ev.date.ToShortDateString()} | Местоположение: {ev.venue}  | Цена: {ev.price:C}");
             }
+
+            Console.WriteLine("========================================");
 
             Console.Write("Въведете ID на събитието,за да видите наличните билети: ");
             if (!int.TryParse(Console.ReadLine(), out int eventIndex) || eventIndex < 1 || eventIndex > events.Count)
@@ -186,10 +192,10 @@
         private static void DisplayAllEvents()
         {
             Console.WriteLine("[4]     Справка за всички събития:       ");
-            Console.WriteLine("eventID\tname\tdate\tvenue\ttotalTickets\tavaibleTickets\tprice");
+            Console.WriteLine("eventID\tname\tdate      \tvenue\ttotalTickets\tavaibleTickets\tprice");
             foreach (var ev in data.Events)
             {
-                Console.WriteLine($"{ev.eventId}\t{ev.name}\t{ev.date.ToShortDateString()}\t{ev.venue}\t{ev.totalTickets}\t{ev.availableTickets}\t{ev.price:C}");
+                Console.WriteLine($"{ev.eventId}\t{ev.name}\t{ev.date.ToShortDateString()}\t{ev.venue}\t{ev.totalTickets}        \t{ev.availableTickets}        \t{ev.price:C}");
             }
         }
         private static void DisplayMenu()
